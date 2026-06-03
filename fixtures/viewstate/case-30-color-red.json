@@ -1,0 +1,12 @@
+{
+  "index": 30,
+  "name": "color-red",
+  "clrTypeDescription": "System.Drawing.Color Red (known)",
+  "base64": "/wEKjQE=",
+  "rawHex": "ff010a8d01",
+  "rawLength": 5,
+  "macSha1Hex": "f1ba68fca4dd0d17d667bc157adc2d148d0ea5c0",
+  "macHmacSha256Hex": "f49f8c2c8d3b9af8bc42734792fde2f3c053dab7f6e9b5158b7d2e441a1746ac",
+  "macdBase64Sha1": "/wEKjQHxumj8pN0NF9ZnvBV63C0UjQ6lwA==",
+  "macdBase64HmacSha256": "/wEKjQH0n4wsjTua+LxCc0eS/eLzwFPat/bptRWLfS5EGhdGrA=="
+}

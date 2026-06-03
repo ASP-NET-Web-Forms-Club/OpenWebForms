@@ -1,0 +1,12 @@
+{
+  "index": 20,
+  "name": "triplet",
+  "clrTypeDescription": "System.Web.UI.Triplet(1,\"two\",true)",
+  "base64": "/wEQAgEFA3R3b2c=",
+  "rawHex": "ff01100201050374776f67",
+  "rawLength": 11,
+  "macSha1Hex": "24e764ea52600402e3497eb0e20495afa0caaa56",
+  "macHmacSha256Hex": "3033200b983b4c729e1f22d5ca2914dd77298ac883178b6aef39a6bc44d43154",
+  "macdBase64Sha1": "/wEQAgEFA3R3b2ck52TqUmAEAuNJfrDiBJWvoMqqVg==",
+  "macdBase64HmacSha256": "/wEQAgEFA3R3b2cwMyALmDtMcp4fItXKKRTddymKyIMXi2rvOaa8RNQxVA=="
+}

@@ -1,0 +1,12 @@
+{
+  "index": 27,
+  "name": "unit-100px",
+  "clrTypeDescription": "System.Web.UI.WebControls.Unit 100px",
+  "base64": "/wEbAAAAAAAAWUABAAAA",
+  "rawHex": "ff011b000000000000594001000000",
+  "rawLength": 15,
+  "macSha1Hex": "0be48d39dad28cf2997b41b3531a650bec89ad93",
+  "macHmacSha256Hex": "2b764c474211ddf4441b2cc503226b49f4a8f482873f0073c1b39f2209bc7deb",
+  "macdBase64Sha1": "/wEbAAAAAAAAWUABAAAAC+SNOdrSjPKZe0GzUxplC+yJrZM=",
+  "macdBase64HmacSha256": "/wEbAAAAAAAAWUABAAAAK3ZMR0IR3fREGyzFAyJrSfSo9IKHPwBzwbOfIgm8fes="
+}

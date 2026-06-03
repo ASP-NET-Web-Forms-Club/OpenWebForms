@@ -1,0 +1,12 @@
+{
+  "index": 15,
+  "name": "double-3.14159",
+  "clrTypeDescription": "System.Double 3.14159",
+  "base64": "/wEHboYb8PkhCUA=",
+  "rawHex": "ff01076e861bf0f9210940",
+  "rawLength": 11,
+  "macSha1Hex": "e9055d25c732a29626540a3f20dac3a54a9733de",
+  "macHmacSha256Hex": "51b919381ce1dd417f617ba6684a21e784cf3c1b241728962342a11836069d72",
+  "macdBase64Sha1": "/wEHboYb8PkhCUDpBV0lxzKiliZUCj8g2sOlSpcz3g==",
+  "macdBase64HmacSha256": "/wEHboYb8PkhCUBRuRk4HOHdQX9he6ZoSiHnhM88GyQXKJYjQqEYNgadcg=="
+}

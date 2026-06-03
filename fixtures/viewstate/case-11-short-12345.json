@@ -1,0 +1,12 @@
+{
+  "index": 11,
+  "name": "short-12345",
+  "clrTypeDescription": "System.Int16 12345",
+  "base64": "/wEBOTA=",
+  "rawHex": "ff01013930",
+  "rawLength": 5,
+  "macSha1Hex": "d98ecb3bdf519a5496465fa23a6612809900429f",
+  "macHmacSha256Hex": "69eaae73c37089e5a0d49517c9ce75935406170e41ffe3e17758c24ddffb3e11",
+  "macdBase64Sha1": "/wEBOTDZjss731GaVJZGX6I6ZhKAmQBCnw==",
+  "macdBase64HmacSha256": "/wEBOTBp6q5zw3CJ5aDUlRfJznWTVAYXDkH/4+F3WMJN3/s+EQ=="
+}

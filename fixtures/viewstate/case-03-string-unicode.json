@@ -1,0 +1,12 @@
+{
+  "index": 3,
+  "name": "string-unicode",
+  "clrTypeDescription": "System.String unicode \"café×中\"",
+  "base64": "/wEFCmNhZsOpw5fkuK0=",
+  "rawHex": "ff01050a636166c3a9c397e4b8ad",
+  "rawLength": 14,
+  "macSha1Hex": "bf0cc57b1742b7912c0772a13aeaa3416647925a",
+  "macHmacSha256Hex": "5bd807da361eb3b1493aceac9f18c2423a059f7188e60389e246bc6de8bcf479",
+  "macdBase64Sha1": "/wEFCmNhZsOpw5fkuK2/DMV7F0K3kSwHcqE66qNBZkeSWg==",
+  "macdBase64HmacSha256": "/wEFCmNhZsOpw5fkuK1b2AfaNh6zsUk6zqyfGMJCOgWfcYjmA4niRrxt6Lz0eQ=="
+}

@@ -1,0 +1,12 @@
+{
+  "index": 32,
+  "name": "pair-nested",
+  "clrTypeDescription": "Pair(Pair(\"a\",\"b\"), Triplet(1,2,3))",
+  "base64": "/wEPDwUBYQUBYhACAQICAgM=",
+  "rawHex": "ff010f0f05016105016210020102020203",
+  "rawLength": 17,
+  "macSha1Hex": "20e8916dee8fb9d16e4e07c939e20872af0da822",
+  "macHmacSha256Hex": "e3384527686982171dec9537b0b420c067112ef3abf194e95caf961b207abc66",
+  "macdBase64Sha1": "/wEPDwUBYQUBYhACAQICAgMg6JFt7o+50W5OB8k54ghyrw2oIg==",
+  "macdBase64HmacSha256": "/wEPDwUBYQUBYhACAQICAgPjOEUnaGmCFx3slTewtCDAZxEu86vxlOlcr5YbIHq8Zg=="
+}

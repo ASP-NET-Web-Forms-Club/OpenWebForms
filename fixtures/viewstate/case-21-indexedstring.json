@@ -1,0 +1,12 @@
+{
+  "index": 21,
+  "name": "indexedstring",
+  "clrTypeDescription": "System.Web.UI.IndexedString \"btn\"",
+  "base64": "/wEeA2J0bg==",
+  "rawHex": "ff011e0362746e",
+  "rawLength": 7,
+  "macSha1Hex": "87a6b1af29e64db341248878fc16dbd96fbc9e61",
+  "macHmacSha256Hex": "b765e3d913932a0a53488ca3d802874774778662faac6140043a6eb917c95088",
+  "macdBase64Sha1": "/wEeA2J0boemsa8p5k2zQSSIePwW29lvvJ5h",
+  "macdBase64HmacSha256": "/wEeA2J0brdl49kTkyoKU0iMo9gCh0d0d4Zi+qxhQAQ6brkXyVCI"
+}

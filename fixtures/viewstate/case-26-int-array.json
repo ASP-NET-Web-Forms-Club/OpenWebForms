@@ -1,0 +1,12 @@
+{
+  "index": 26,
+  "name": "int-array",
+  "clrTypeDescription": "System.Int32[] {1,2,3}",
+  "base64": "/wEUKwEDAgECAgID",
+  "rawHex": "ff01142b0103020102020203",
+  "rawLength": 12,
+  "macSha1Hex": "527f5948cdd1819904eee13f3a2241cf591fbc57",
+  "macHmacSha256Hex": "118a4c15a39bc1e2647e950f263436998cd2ba51c69107fb95aff9e577d99bd3",
+  "macdBase64Sha1": "/wEUKwEDAgECAgIDUn9ZSM3RgZkE7uE/OiJBz1kfvFc=",
+  "macdBase64HmacSha256": "/wEUKwEDAgECAgIDEYpMFaObweJkfpUPJjQ2mYzSulHGkQf7la/55XfZm9M="
+}

@@ -1,0 +1,12 @@
+{
+  "index": 10,
+  "name": "byte-200",
+  "clrTypeDescription": "System.Byte 200",
+  "base64": "/wEDyA==",
+  "rawHex": "ff0103c8",
+  "rawLength": 4,
+  "macSha1Hex": "1f35c05b05823ad58a8143cde6299e71e40d20b5",
+  "macHmacSha256Hex": "6061bf839e20df8dc55c7a8942a2e4488c4cde653e8d3e640eb4ab23a65d3264",
+  "macdBase64Sha1": "/wEDyB81wFsFgjrVioFDzeYpnnHkDSC1",
+  "macdBase64HmacSha256": "/wEDyGBhv4OeIN+NxVx6iUKi5EiMTN5lPo0+ZA60qyOmXTJk"
+}

@@ -1,0 +1,12 @@
+{
+  "index": 17,
+  "name": "datetime-utc",
+  "clrTypeDescription": "System.DateTime 2026-06-02T13:45:30Z (Utc)",
+  "base64": "/wEGADnwNa3A3kg=",
+  "rawHex": "ff01060039f035adc0de48",
+  "rawLength": 11,
+  "macSha1Hex": "7434a2b62c09828c08358c0be255652734935fea",
+  "macHmacSha256Hex": "7e0704c7586913f64f153f4db791e2e2439159aaee387cfe6af1e60016e70125",
+  "macdBase64Sha1": "/wEGADnwNa3A3kh0NKK2LAmCjAg1jAviVWUnNJNf6g==",
+  "macdBase64HmacSha256": "/wEGADnwNa3A3kh+BwTHWGkT9k8VP023keLiQ5FZqu44fP5q8eYAFucBJQ=="
+}

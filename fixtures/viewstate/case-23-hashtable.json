@@ -1,0 +1,12 @@
+{
+  "index": 23,
+  "name": "hashtable",
+  "clrTypeDescription": "System.Collections.Hashtable {k1:v1,k2:2}",
+  "base64": "/wEXAgUCazICAgUCazEFAnYx",
+  "rawHex": "ff01170205026b32020205026b3105027631",
+  "rawLength": 18,
+  "macSha1Hex": "472c4e9effb53f03417d4a151bb19ae9ee700f11",
+  "macHmacSha256Hex": "b9fb44283c4d8a822e021057f160d6558f457d4658ca711dc7b065530f562e84",
+  "macdBase64Sha1": "/wEXAgUCazICAgUCazEFAnYxRyxOnv+1PwNBfUoVG7Ga6e5wDxE=",
+  "macdBase64HmacSha256": "/wEXAgUCazICAgUCazEFAnYxuftEKDxNioIuAhBX8WDWVY9FfUZYynEdx7BlUw9WLoQ="
+}

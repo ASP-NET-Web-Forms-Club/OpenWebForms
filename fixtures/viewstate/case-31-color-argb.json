@@ -1,0 +1,12 @@
+{
+  "index": 31,
+  "name": "color-argb",
+  "clrTypeDescription": "System.Drawing.Color FromArgb(10,20,30,40)",
+  "base64": "/wEJKB4UCg==",
+  "rawHex": "ff0109281e140a",
+  "rawLength": 7,
+  "macSha1Hex": "305578ba8cf004efadf2ad7acb45ac2490bf9f5e",
+  "macHmacSha256Hex": "a6e9104d765e5cc7bd129c07129222d8dd2ef204a1cf9dce3d8fa9a6e1c82bf8",
+  "macdBase64Sha1": "/wEJKB4UCjBVeLqM8ATvrfKtestFrCSQv59e",
+  "macdBase64HmacSha256": "/wEJKB4UCqbpEE12XlzHvRKcBxKSItjdLvIEoc+dzj2PqabhyCv4"
+}

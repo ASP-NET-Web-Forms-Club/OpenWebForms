@@ -1,0 +1,12 @@
+{
+  "index": 0,
+  "name": "null",
+  "clrTypeDescription": "null reference",
+  "base64": "/wFk",
+  "rawHex": "ff0164",
+  "rawLength": 3,
+  "macSha1Hex": "84499354fd8e3078b026ceb640378dd3d7d5a5da",
+  "macHmacSha256Hex": "cb6fc79ed48a97eaebfe62d4899fbe6af01cc4046ce4786aa60173c0d6d66a16",
+  "macdBase64Sha1": "/wFkhEmTVP2OMHiwJs62QDeN09fVpdo=",
+  "macdBase64HmacSha256": "/wFky2/HntSKl+rr/mLUiZ++avAcxARs5HhqpgFzwNbWahY="
+}

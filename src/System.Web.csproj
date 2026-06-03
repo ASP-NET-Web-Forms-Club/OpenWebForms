@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>System.Web</AssemblyName>
+    <RootNamespace>System.Web</RootNamespace>
+    <!-- Frozen identity. The clean-room assembly keeps the SAME AssemblyVersion (4.0.0.0) as the
+         shared-framework System.Web facade so its strong identity matches the original .NET
+         Framework type identities. Runtime shadowing of the framework facade is NOT solved by a
+         version bump (that approach was reverted); instead the standalone host loads this assembly
+         through a custom AssemblyLoadContext that intercepts the "System.Web" simple name and
+         binds it to our app-local copy (see samples/host/AlcBootstrap.cs).
+         FileVersion stays 4.8.0.0 as product-line info (this reimplements .NET Framework 4.8). -->
+    <AssemblyVersion>4.0.0.0</AssemblyVersion>
+    <FileVersion>4.8.0.0</FileVersion>
+    <Version>4.0.0.0</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>1701;1702;0108;0114;0628;0809;0612;0618;0672;1591;3005;0419;0465;0469;SYSLIB0003;SYSLIB0011;SYSLIB0021;SYSLIB0051;CS0618</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.1" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.CodeDom" Version="8.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.8.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="System.Security.Permissions" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>

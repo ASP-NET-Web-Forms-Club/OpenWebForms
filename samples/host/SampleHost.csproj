@@ -1,0 +1,96 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>SampleHost</AssemblyName>
+    <RootNamespace>SampleHost</RootNamespace>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Private=true: our clean-room System.Web.dll is copied app-local. -->
+    <ProjectReference Include="../../src/System.Web.csproj" Private="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>wwwroot/%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+  </ItemGroup>
+
+  <!--
+    The shared framework (Microsoft.NETCore.App) ships a throw-only System.Web facade. It is
+    pulled in as both (a) a compile-time reference assembly and (b) a runtime/platform assembly.
+    Because it has the same name+version (4.0.0.0) as our clean-room assembly, ResolveAssembly-
+    References (RAR) treats them as conflicting and prefers the strong-named framework copy,
+    dropping our project-referenced copy-local assembly. The app then loads the facade at run
+    time and System.Web.Server.* types are missing (TypeLoadException).
+
+    Fix: before RAR, strip the framework's System.Web reference assembly from the reference set
+    so there is no conflict and our project assembly is the only System.Web. Also strip the
+    System.Web entry from the platform manifest so package-conflict resolution keeps our
+    copy-local assembly and emits it into deps.json as an app-local runtime assembly.
+  -->
+  <Target Name="RemoveFrameworkSystemWebReference"
+          BeforeTargets="ResolveAssemblyReferences;_HandlePackageFileConflicts">
+    <ItemGroup>
+      <!-- Drop the ref-pack / framework System.Web reference (matches files under the
+           Microsoft.NETCore.App ref or shared dirs), keep our project reference. -->
+      <Reference Remove="@(Reference)"
+                 Condition="'%(Reference.NuGetPackageId)' == 'Microsoft.NETCore.App.Ref' and '%(Filename)' == 'System.Web'" />
+      <ReferencePath Remove="@(ReferencePath)"
+                     Condition="'%(Filename)' == 'System.Web' and '%(ReferencePath.FrameworkReferenceName)' == 'Microsoft.NETCore.App'" />
+    </ItemGroup>
+  </Target>
+
+  <UsingTask TaskName="FilterPlatformManifests"
+             TaskFactory="RoslynCodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+    <ParameterGroup>
+      <Input ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <IntermediateDir ParameterType="System.String" Required="true" />
+      <Output ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Code Type="Fragment" Language="cs"><![CDATA[
+        var outList = new System.Collections.Generic.List<Microsoft.Build.Framework.ITaskItem>();
+        string dir = System.IO.Path.Combine(IntermediateDir, "_swfiltered");
+        System.IO.Directory.CreateDirectory(dir);
+        foreach (var item in Input)
+        {
+            string path = item.ItemSpec;
+            if (!System.IO.File.Exists(path)) { outList.Add(item); continue; }
+            var lines = System.IO.File.ReadAllLines(path);
+            var kept = new System.Collections.Generic.List<string>();
+            foreach (var line in lines)
+            {
+                if (line.Trim().StartsWith("System.Web.dll|", System.StringComparison.OrdinalIgnoreCase)) { continue; }
+                kept.Add(line);
+            }
+            string newPath = System.IO.Path.Combine(dir, System.IO.Path.GetFileName(path));
+            System.IO.File.WriteAllLines(newPath, kept);
+            outList.Add(new Microsoft.Build.Utilities.TaskItem(newPath));
+        }
+        Output = outList.ToArray();
+      ]]></Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="DropSystemWebPlatformManifestEntry"
+          BeforeTargets="_HandlePackageFileConflicts"
+          Condition="'@(PackageConflictPlatformManifests)' != ''">
+    <FilterPlatformManifests Input="@(PackageConflictPlatformManifests)"
+                             IntermediateDir="$(IntermediateOutputPath)">
+      <Output TaskParameter="Output" ItemName="_FilteredPlatformManifests" />
+    </FilterPlatformManifests>
+    <ItemGroup>
+      <PackageConflictPlatformManifests Remove="@(PackageConflictPlatformManifests)" />
+      <PackageConflictPlatformManifests Include="@(_FilteredPlatformManifests)" />
+    </ItemGroup>
+  </Target>
+
+</Project>

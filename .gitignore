@@ -36,3 +36,7 @@ project.lock.json
 # ---- .NET ----
 *.binlog
 msbuild.log
+
+# ---- Scratch / transient (repo root) ----
+/obj_ourtypes.txt
+/task.txt

@@ -1,0 +1,12 @@
+{
+  "index": 6,
+  "name": "int-neg1",
+  "clrTypeDescription": "System.Int32 -1",
+  "base64": "/wEC/////w8=",
+  "rawHex": "ff0102ffffffff0f",
+  "rawLength": 8,
+  "macSha1Hex": "2667dbc62ddfc4a29fc9918521e37922c095e945",
+  "macHmacSha256Hex": "052c97af905134a73cae4edc1a541c5eef6205a4f01da63834d102242e6f24d4",
+  "macdBase64Sha1": "/wEC/////w8mZ9vGLd/Eop/JkYUh43kiwJXpRQ==",
+  "macdBase64HmacSha256": "/wEC/////w8FLJevkFE0pzyuTtwaVBxe72IFpPAdpjg00QIkLm8k1A=="
+}

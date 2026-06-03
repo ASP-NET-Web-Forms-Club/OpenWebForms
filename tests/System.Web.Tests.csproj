@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>System.Web.Tests</AssemblyName>
+    <RootNamespace>System.Web.Tests</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../src/System.Web.csproj" Private="true" />
+  </ItemGroup>
+
+  <!--
+    net8.0's shared framework ships a strong-named facade assembly named
+    "System.Web" (PublicKeyToken=b03f5f7f11d50a3a) that only type-forwards
+    HttpUtility. This test project references our clean-room reimplementation
+    "System.Web" (PublicKeyToken=null), which causes two problems:
+
+      1. COMPILE time. The compiler would otherwise bind the test code's
+         typeof(System.Web.HttpContext) against the strong-named framework
+         facade. At run time that facade, which lacks those types, satisfies
+         the identity from the trusted platform assemblies and type loads fail.
+      2. MSBuild conflict resolution prefers the strong-named framework copy
+         and drops our DLL from the output.
+
+    Fix in two stages. ResolveFrameworkReferences/RAR pulls the framework
+    System.Web in as a raw Reference item resolved from the ref pack; remove
+    that item before RAR so no conflict (MSB3243) ever forms and our project
+    reference is the sole "System.Web". A defensive post-RAR pass also strips
+    any framework-resolved System.Web that slipped into the compile/runtime
+    reference sets, matched by the ref-pack path so our project output is
+    never touched.
+  -->
+  <Target Name="RemoveFrameworkSystemWebReferenceBeforeRar"
+          BeforeTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <Reference Remove="@(Reference)"
+                 Condition="'%(Filename)' == 'System.Web' and $([System.String]::Copy('%(Identity)').Contains('Microsoft.NETCore.App.Ref'))" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="RemoveFrameworkSystemWebReferenceAfterRar"
+          AfterTargets="ResolveAssemblyReferences"
+          BeforeTargets="CoreCompile;GenerateBuildDependencyFile;CopyFilesToOutputDirectory">
+    <ItemGroup>
+      <ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)"
+                 Condition="'%(Filename)' == 'System.Web' and $([System.String]::Copy('%(FullPath)').Contains('Microsoft.NETCore.App.Ref'))" />
+      <ReferencePath Remove="@(ReferencePath)"
+                 Condition="'%(Filename)' == 'System.Web' and $([System.String]::Copy('%(FullPath)').Contains('Microsoft.NETCore.App.Ref'))" />
+    </ItemGroup>
+  </Target>
+
+</Project>

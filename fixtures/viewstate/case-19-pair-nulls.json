@@ -1,0 +1,12 @@
+{
+  "index": 19,
+  "name": "pair-nulls",
+  "clrTypeDescription": "System.Web.UI.Pair(null,null)",
+  "base64": "/wEPZGQ=",
+  "rawHex": "ff010f6464",
+  "rawLength": 5,
+  "macSha1Hex": "22e9eea8b14adc17ed18c1b29ee29da489fa8a8f",
+  "macHmacSha256Hex": "915b0b4d7bb192a127246e97eaaa7ed634419f2793ed561880da638e7f55a6cc",
+  "macdBase64Sha1": "/wEPZGQi6e6osUrcF+0YwbKe4p2kifqKjw==",
+  "macdBase64HmacSha256": "/wEPZGSRWwtNe7GSoSckbpfqqn7WNEGfJ5PtVhiA2mOOf1WmzA=="
+}
