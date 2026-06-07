@@ -1,0 +1,239 @@
+# Setting Up WSL to Run Your First .NET Console App
+
+A start-to-finish guide: from a fresh Windows machine to running a "Hello World"
+C# console app inside Linux (WSL2 + Ubuntu). Written for Windows 11.
+
+---
+
+## Overview
+
+WSL (Windows Subsystem for Linux) lets you run a real Linux environment inside
+Windows — no separate virtual machine to manage. This guide installs WSL2 with
+Ubuntu, installs the .NET SDK inside it, and runs a console app on Linux.
+
+**The whole path:**
+1. Install the WSL engine
+2. Install an Ubuntu distribution
+3. Create your Linux user
+4. Install the .NET SDK (user-level, no sudo)
+5. Make `dotnet` permanent on your PATH
+6. Build and run a Hello World app
+
+---
+
+## Step 1 — Install the WSL engine
+
+Open **PowerShell** or **Windows Terminal as Administrator** (right-click →
+"Run as administrator"), then run:
+
+```powershell
+wsl --install
+```
+
+This enables the WSL2 platform. On some systems it also installs Ubuntu
+automatically; on others it only installs the engine. **Restart your computer**
+when it finishes.
+
+> Tip: After restart, verify the engine with `wsl --status`. If it reports
+> `Default Version: 2`, the engine is ready.
+
+---
+
+## Step 2 — Install an Ubuntu distribution
+
+Check whether a distro is already installed:
+
+```powershell
+wsl --list --verbose
+```
+
+If it says *"has no installed distributions"*, install Ubuntu. See available
+options first:
+
+```powershell
+wsl --list --online
+```
+
+Then install the latest LTS (recommended — stable and well-supported for .NET):
+
+```powershell
+wsl --install -d Ubuntu-24.04
+```
+
+> Why Ubuntu LTS? Microsoft officially tests .NET against it, package support is
+> excellent, and online help is abundant. Pick an **LTS** version (e.g. 24.04)
+> over the newest release for fewer surprises.
+
+---
+
+## Step 3 — Create your Linux user
+
+The first time Ubuntu launches, it provisions itself and prompts:
+
+```
+Create a default Unix user account: <type a username>
+New password: <type a password — INVISIBLE as you type>
+Retype new password:
+```
+
+**Important gotchas:**
+- After typing the username, **press Enter** — it waits for input, it is not frozen.
+- The password is **completely invisible** while typing — no dots, no asterisks.
+  This is normal Linux behavior, not a hang. Type it and press Enter.
+- This Linux username/password is **separate from your Windows login**. It does
+  not replace or affect how you sign in to Windows. The password is mainly used
+  for `sudo` (admin commands).
+
+When done, you land at a Linux prompt like `you@machine:~$`. Ubuntu is now live.
+
+---
+
+## Step 4 — Install the .NET SDK (inside Ubuntu)
+
+> The .NET on Windows and the .NET on Linux are **different binaries**. To run
+> apps on Linux you must install .NET *inside* Ubuntu, separately.
+
+The cleanest method is Microsoft's install script — it installs into your home
+folder (`~/.dotnet`) and **requires no sudo**.
+
+Inside the Ubuntu terminal:
+
+```bash
+cd ~
+wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+chmod +x dotnet-install.sh
+./dotnet-install.sh --channel LTS
+```
+
+This downloads ~200 MB and installs the latest LTS SDK to `~/.dotnet`.
+
+> Avoid `sudo apt install dotnet` or `sudo snap install dotnet` for this setup.
+> Those may install a different/older version and cause confusion. Stick with the
+> script-installed SDK in `~/.dotnet`.
+
+---
+
+## Step 5 — Put `dotnet` on your PATH permanently
+
+The installer only adds `dotnet` to PATH for that one session. Make it permanent
+by adding it to `~/.bashrc`:
+
+```bash
+cat >> ~/.bashrc <<'EOF'
+
+export DOTNET_ROOT=$HOME/.dotnet
+export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
+EOF
+```
+
+Then reload it in your current shell:
+
+```bash
+source ~/.bashrc
+```
+
+> **Common trap:** If you skip `source ~/.bashrc` (or use a terminal that was
+> already open before this step), you'll get `Command 'dotnet' not found`. Either
+> run `source ~/.bashrc`, or simply close and reopen the Ubuntu terminal — a new
+> shell reads `.bashrc` from the start.
+
+Verify it works:
+
+```bash
+dotnet --version
+dotnet --list-sdks
+```
+
+You should see a version number (e.g. `10.0.300`) and the SDK path under
+`~/.dotnet/sdk`.
+
+---
+
+## Step 6 — Create and run Hello World
+
+Create a project in your Linux home folder (fast native filesystem):
+
+```bash
+cd ~
+mkdir hello && cd hello
+dotnet new console -o .
+```
+
+Replace `Program.cs` with a simple app:
+
+```bash
+cat > Program.cs <<'EOF'
+Console.WriteLine("Hello World");
+Console.WriteLine("Press any key to exit this console app...");
+Console.ReadKey();
+EOF
+```
+
+Build and run it:
+
+```bash
+dotnet run -c Release
+```
+
+You'll see:
+
+```
+Hello World
+Press any key to exit this console app...
+```
+
+Press any key, and it exits. **Your C# app just ran on Linux.** 🎉
+
+---
+
+## Where to keep your projects
+
+WSL gives you two filesystems:
+
+- **Linux native** (`~`, i.e. `/home/<user>`) — fast. Best for active development.
+  Physically stored in WSL's own virtual disk (a `.vhdx` file on your C: drive).
+- **Windows drives** — mounted inside Linux at `/mnt/c`, `/mnt/d`, etc. Shared
+  with Windows, but slower to access from the Linux side due to the
+  filesystem-boundary overhead.
+
+A Windows path like `D:\Projects\MyApp` becomes `/mnt/d/Projects/MyApp` in Linux.
+For quick tests you can run straight off `/mnt/...`; for heavy/iterative work,
+copy into `~` for speed:
+
+```bash
+cp -r /mnt/d/Projects/MyApp ~/MyApp && cd ~/MyApp && dotnet run
+```
+
+---
+
+## Quick reference
+
+| Task | Command |
+|------|---------|
+| Check WSL status | `wsl --status` |
+| List installed distros | `wsl --list --verbose` |
+| List installable distros | `wsl --list --online` |
+| Install Ubuntu LTS | `wsl --install -d Ubuntu-24.04` |
+| Launch Ubuntu | `wsl` or click "Ubuntu" in Start menu |
+| Check .NET version | `dotnet --version` |
+| New console project | `dotnet new console -o .` |
+| Build (Release) | `dotnet build -c Release` |
+| Run | `dotnet run -c Release` |
+| Windows C: in Linux | `/mnt/c/...` |
+
+---
+
+## Troubleshooting
+
+**"has no installed distributions"** — the engine is installed but no Linux distro
+is. Run `wsl --install -d Ubuntu-24.04`.
+
+**Stuck on "Create a default Unix user account"** — it's waiting for input. Type a
+username, press Enter, then type the (invisible) password and press Enter.
+
+**`Command 'dotnet' not found`** — PATH not loaded. Run `source ~/.bashrc`, or open
+a fresh terminal. Do *not* install dotnet via apt/snap as the suggestion text offers.
+
+**Want to run on a privileged port (< 1024, e.g. port 80)** — that needs root.
+Run with `sudo`, but note `sudo` resets PATH, so call dotnet by full path:
+`sudo $HOME/.dotnet/dotnet run -c Release`.

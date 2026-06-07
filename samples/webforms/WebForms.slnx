@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="WebFormsPageless/WebFormsPageless.csproj" Id="12afd1dd-97de-4d7d-9d4f-4319f367a7bd" />
+  <Project Path="WebFormsServerControls/WebFormsServerControls.csproj" Id="2bb0fb14-93a4-44b2-a678-13f0e95eba38" />
+  <Project Path="WebFormsVanilla/WebFormsVanilla.csproj" Id="ff26e8d4-2cf0-4f63-a1d9-bddaea0982f5" />
+</Solution>
